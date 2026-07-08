@@ -1,17 +1,31 @@
-/* Narrow the "On this page" table of contents panel to half its default width. */
-.right-sidebar-panel .sl-container {
-	width: calc(var(--sl-sidebar-width) / 2 - var(--sl-sidebar-pad-x));
+/*
+ * Narrow the "On this page" (right-hand table of contents) column to half its
+ * default width, without touching --sl-sidebar-width itself, which the left
+ * navigation sidebar also relies on.
+ */
+:root {
+	--hmr-toc-width: calc(var(--sl-sidebar-width) / 2);
 }
 
 @media (min-width: 72rem) {
-	.right-sidebar-panel .sl-container {
-		max-width: calc(
-			(
-				(
-						100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) - 2 *
-							var(--sl-sidebar-pad-x)
-					) * 0.25
-			) / 2
+	/* Reserved column that sets the actual visible width / divider position. */
+	.right-sidebar-container {
+		width: max(
+			var(--hmr-toc-width),
+			calc(var(--hmr-toc-width) + (100% - var(--sl-content-width) - var(--hmr-toc-width)) / 2)
 		);
 	}
+
+	/* Give the space reclaimed from the TOC back to the main content column. */
+	[data-has-sidebar][data-has-toc] .main-pane {
+		width: min(
+			calc(100% - var(--hmr-toc-width)),
+			calc(var(--sl-content-width) + (100% - var(--sl-content-width) - var(--hmr-toc-width)) / 2)
+		);
+	}
+}
+
+/* Inner TOC text box matches the narrower column. */
+.right-sidebar-panel .sl-container {
+	width: calc(var(--hmr-toc-width) - var(--sl-sidebar-pad-x));
 }
