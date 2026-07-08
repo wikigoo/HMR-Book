@@ -9,17 +9,17 @@ export default defineConfig({
 			title: 'My Docs',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
-				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
-				},
+				{ label: 'Guides', items: [{ autogenerate: { directory: 'guides' } }] },
+				{ label: 'Astro', items: [{ autogenerate: { directory: 'astro' } }] },
+				{ label: 'Checklist', items: [{ autogenerate: { directory: 'Checklist' } }] },
+				{ label: 'Cloudflared', items: [{ autogenerate: { directory: 'cloudflared' } }] },
+				{ label: 'FlowiseAI', items: [{ autogenerate: { directory: 'flowiseai' } }] },
+				{ label: 'Flutter', items: [{ autogenerate: { directory: 'flutter' } }] },
+				{ label: 'Marketing', items: [{ autogenerate: { directory: 'Marketing' } }] },
+				{ label: 'Other', items: [{ autogenerate: { directory: 'Other' } }] },
+				{ label: 'Script', items: [{ autogenerate: { directory: 'Script' } }] },
+				{ label: 'UI', items: [{ autogenerate: { directory: 'UI' } }] },
+				{ label: 'Reference', items: [{ autogenerate: { directory: 'reference' } }] },
 			],
 		}),
 	],
