@@ -11,106 +11,74 @@ hero:
       icon: external
       variant: minimal
 ---
+---
+title: Executive Project Blueprint
+description: Internal knowledge base and technical architecture guide for HMR (همر) project personnel.
+template: doc
+---
 
-## Project Identity
+## 1. Executive Summary & Core Identity
 
-- **Name:** HMR (همر)
-- **Nature:** An AI mobile-hardware advisor chatbot for the Iranian market. It is an AI chatbot specialized in mobile technology.
-- **Role:** Advisor, not decision-maker.
-- **Platforms:** Website + Android application
-- **Users:** Persian-speaking
-#
-**Addresses:**
+**HMR (همر)** is an AI-powered mobile-hardware advisor chatbot engineered specifically for the Persian-speaking Iranian market. Specialized in mobile technology, the platform bridges the gap between complex consumer electronics and everyday users by providing clear, intelligent guidance.
 
-- Site: https://hmrbot.com/ — pages: `/blog`, `/about`, `/contact`, `/privacy`, `/disclaimer`
-- Admin dashboard (FlowiseAI): https://srv.hmrbot.com/
-#
-## The Five Product Pillars
-
-1. New-phone buying guide
-2. Used-phone buying guide + fraud / counterfeit detection
-3. Hardware troubleshooting & fault diagnosis
-4. Hardware education
-5. Accessories guidance
-#
-## System Components & Repositories
-
-### 1. Chatbot Engine — FlowiseAI
-
-- **Base repo:** https://github.com/flowiseai/flowise
-- **Architecture:** Agentflows v2 / Multi-Agents ([docs](https://github.com/FlowiseAI/FlowiseDocs/blob/main/en/using-flowise/agentflowv1/multi-agents.md))
-- **Model connections:** via OpenRouter API
-    - **LLM:** `gemini-3.1-flash-lite`
-    - **Embedding:** `openai/text-embedding-3-large`
-    - **Rerank:** `google/semantic-ranker-default-004`
-
-### 2. Server — VPS
-
-- **Repo:** https://github.com/wikigoo/HMR-VPS
-- **Deployment:** Docker
-- **Specs:** Ubuntu 24.04 · 2-Core CPU · 4GB RAM · 40GB Storage · 1 IP · Nuremberg
-
-### 3. Website — Astro
-
-- **Repo:** https://github.com/wikigoo/HMR-Astro
-- **Framework:** [Astro](https://github.com/withastro/astro)
-- **Hosting:** Cloudflare Pages
-
-### 4. Android App — Flutter
-
-- **Repo:** https://github.com/wikigoo/HMR-Flutter
-- **Framework:** [Flutter](https://github.com/flutter/flutter)
-- **Authentication:** Google Sign-In via Firebase + Google Cloud Console
-    - **Project ID:** `ir-hmrbot-app`
-    - **Project Number:** `829078792642`
-
-### 5. Monitoring — UptimeRobot
-#
-Monitored endpoints:
-
-- `hmrbot.com`
-- `hmrbot.com/api/health`
-- `srv.hmrbot.com`
+A foundational tenet of the project is its operational philosophy: **HMR acts strictly as a technical advisor, not a final decision-maker**. It empowers users with data-driven recommendations while leaving purchasing or repair decisions entirely in their hands. The service is delivered across a dual-platform ecosystem comprising a responsive web application and a native Android mobile app.
 
 ---
-import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## HMR Project Links
+## 2. The Five Product Pillars
 
-<CardGrid stagger>
-	<Card title="Main Site" icon="external">
-		[hmrbot.com](https://hmrbot.com/) — the public-facing HMR website.
-	</Card>
-	<Card title="Backend Server" icon="external">
-		[srv.hmrbot.com](https://srv.hmrbot.com/) — backend / API server.
-	</Card>
-	<Card title="AI Advisor App" icon="external">
-		[hmrbot.com/ai](https://hmrbot.com/ai/) — the Flutter web chat advisor.
-	</Card>
-	<Card title="Documentation" icon="external">
-		[book.hmrbot.com](https://book.hmrbot.com/) — this documentation site.
-	</Card>
-	<Card title="Admin Dashboard" icon="external">
-		[hmrbot.com/admin](https://hmrbot.com/admin) — the admin panel.
-	</Card>
-</CardGrid>
+The HMR product ecosystem is built upon five distinct service pillars designed to support users throughout the entire lifecycle of mobile device ownership:
 
-## HMR Project GitHub Repositories
+* **New-Phone Buying Guide:** Offers intelligent, tailored recommendations to help users navigate the market and select new mobile devices that fit their specific budget and technical requirements.
+* **Used-Phone Buying Guide & Counterfeit Detection:** Provides specialized diagnostic assistance for evaluating pre-owned devices, identifying potential hardware fraud, and detecting counterfeit or refurbished hardware.
+* **Hardware Troubleshooting & Fault Diagnosis:** Utilizes interactive problem-solving workflows that assist users in isolating, identifying, and understanding hardware malfunctions or performance issues.
+* **Hardware Education:** Delivers accessible learning modules and explanations designed to increase consumer literacy regarding mobile processors, displays, battery chemistry, and internal components.
+* **Accessories Guidance:** Supplies expert advice on selecting compatible, high-quality peripherals, charging bricks, cables, and protective gear.
 
-<CardGrid stagger>
-	<Card title="HMR-Book" icon="github">
-		[github.com/wikigoo/HMR-Book](https://github.com/wikigoo/HMR-Book) — this documentation site.
-	</Card>
-	<Card title="HMR-VPS" icon="github">
-		[github.com/wikigoo/HMR-VPS](https://github.com/wikigoo/HMR-VPS) — server / infrastructure configuration.
-	</Card>
-	<Card title="HMR-Astro" icon="github">
-		[github.com/wikigoo/HMR-Astro](https://github.com/wikigoo/HMR-Astro) — the frontend, built with Astro on Cloudflare Workers.
-	</Card>
-	<Card title="HMR-Flutter" icon="github">
-		[github.com/wikigoo/HMR-Flutter](https://github.com/wikigoo/HMR-Flutter) — the Flutter mobile app.
-	</Card>
-	<Card title="HMR-Design" icon="github">
-		[github.com/wikigoo/HMR-Design](https://github.com/wikigoo/HMR-Design) — design assets.
-	</Card>
-</CardGrid>
+---
+
+## 3. Technical Architecture & System Components
+
+The project utilizes a decoupled, modern Jamstack and micro-agent architecture designed for high performance, scalability, and ease of maintenance.
+
+| Component | Technology / Framework | Technical Specifications & Configuration |
+| :--- | :--- | :--- |
+| **AI Chatbot Engine** | **FlowiseAI** | Built on Agentflows v2 / Multi-Agents architecture. Model routing is handled via OpenRouter API utilizing `gemini-3.1-flash-lite` for LLM, `openai/text-embedding-3-large` for embeddings, and `google/semantic-ranker-default-004` for reranking. |
+| **Backend Server (VPS)** | **Docker / Ubuntu** | Containerized deployment using Docker on Ubuntu 24.04. Hosted in Nuremberg with 1 dedicated IP address, 2-Core CPU, 4GB RAM, and 40GB Storage. |
+| **Web Application** | **Astro** | Modern frontend framework utilizing Astro. Deployed and hosted globally via Cloudflare Pages and Workers. |
+| **Android Application** | **Flutter** | Cross-platform mobile development built using Flutter. Authentication integrates Google Sign-In via Firebase and Google Cloud Console under Project ID `ir-hmrbot-app` (Project Number `829078792642`). |
+| **System Monitoring** | **UptimeRobot** | Automated uptime and health tracking across critical system endpoints. |
+
+---
+
+## 4. Live Ecosystem & Endpoints
+
+The project relies on several specialized web domains and subdomains to separate user-facing tools, backend administration, and internal documentation:
+
+* **`https://hmrbot.com/`**: The main public-facing web platform, including informational and legal directories such as `/blog`, `/about`, `/contact`, `/privacy`, and `/disclaimer`.
+* **`https://hmrbot.com/ai`**: The dedicated web application interface for the Flutter-based AI chat advisor.
+* **`https://hmrbot.com/admin`**: The general administrative management panel.
+* **`https://srv.hmrbot.com/`**: The backend API server and FlowiseAI admin dashboard.
+* **`https://book.hmrbot.com/`**: The official documentation and knowledge base portal for project staff and developers.
+
+---
+
+## 5. Codebase & Version Control
+
+All system infrastructure, application code, and documentation are version-controlled across five dedicated GitHub repositories under the **`wikigoo`** organization:
+
+* **`HMR-Astro` (`github.com/wikigoo/HMR-Astro`)**: Contains the source code for the public-facing website, built with the Astro framework and configured for Cloudflare deployment.
+* **`HMR-Flutter` (`github.com/wikigoo/HMR-Flutter`)**: Contains the mobile application codebase developed in Flutter for Android, along with web advisor build configurations.
+* **`HMR-VPS` (`github.com/wikigoo/HMR-VPS`)**: Houses the server infrastructure configuration, Docker files, and deployment scripts for the Nuremberg VPS.
+* **`HMR-Book` (`github.com/wikigoo/HMR-Book`)**: Contains the source files and markdown content for the internal and external documentation site (`book.hmrbot.com`).
+* **`HMR-Design` (`github.com/wikigoo/HMR-Design`)**: Serves as the central repository for UI/UX assets, branding graphics, and system design specifications.
+
+---
+
+## 6. Reliability & Health Monitoring
+
+To ensure continuous availability for Persian-speaking users, system uptime is tracked 24/7 via **UptimeRobot**. Monitoring protocols evaluate three primary operational endpoints to verify full-stack health:
+
+* **`hmrbot.com`**: Monitors frontend availability and Cloudflare routing.
+* **`hmrbot.com/api/health`**: Checks the core API gateway and internal response status.
+* **`srv.hmrbot.com`**: Verifies the uptime of the VPS, FlowiseAI engine, and LLM processing capabilities.</CardGrid>
