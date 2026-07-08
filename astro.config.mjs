@@ -6,7 +6,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'HMR Book',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{ label: 'Guides', items: [{ autogenerate: { directory: 'guides' } }] },
@@ -19,8 +19,8 @@ export default defineConfig({
 				{ label: 'Other', items: [{ autogenerate: { directory: 'Other' } }] },
 				{ label: 'Script', items: [{ autogenerate: { directory: 'Script' } }] },
 				{ label: 'UI', items: [{ autogenerate: { directory: 'UI' } }] },
-				{ label: 'Reference', items: [{ autogenerate: { directory: 'reference' } }] },
 			],
+			customCss: ['./src/styles/custom.css'],
 		}),
 	],
 });
