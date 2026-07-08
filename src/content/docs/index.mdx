@@ -11,6 +11,73 @@ hero:
       icon: external
       variant: minimal
 ---
+
+
+---
+
+## Project Identity
+
+- **Name:** HMR (همر)
+- **Nature:** An AI mobile-hardware advisor chatbot for the Iranian market. It is an AI chatbot specialized in mobile technology.
+- **Role:** Advisor, not decision-maker.
+- **Platforms:** Website + Android application
+- **Users:** Persian-speaking
+#
+**Addresses:**
+
+- Site: https://hmrbot.com/ — pages: `/blog`, `/about`, `/contact`, `/privacy`, `/disclaimer`
+- Admin dashboard (FlowiseAI): https://srv.hmrbot.com/
+#
+## The Five Product Pillars
+
+1. New-phone buying guide
+2. Used-phone buying guide + fraud / counterfeit detection
+3. Hardware troubleshooting & fault diagnosis
+4. Hardware education
+5. Accessories guidance
+#
+## System Components & Repositories
+
+### 1. Chatbot Engine — FlowiseAI
+
+- **Base repo:** https://github.com/flowiseai/flowise
+- **Architecture:** Agentflows v2 / Multi-Agents ([docs](https://github.com/FlowiseAI/FlowiseDocs/blob/main/en/using-flowise/agentflowv1/multi-agents.md))
+- **Model connections:** via OpenRouter API
+    - **LLM:** `gemini-3.1-flash-lite`
+    - **Embedding:** `openai/text-embedding-3-large`
+    - **Rerank:** `google/semantic-ranker-default-004`
+
+### 2. Server — VPS
+
+- **Repo:** https://github.com/wikigoo/HMR-VPS
+- **Deployment:** Docker
+- **Specs:** Ubuntu 24.04 · 2-Core CPU · 4GB RAM · 40GB Storage · 1 IP · Nuremberg
+
+### 3. Website — Astro
+
+- **Repo:** https://github.com/wikigoo/HMR-Astro
+- **Framework:** [Astro](https://github.com/withastro/astro)
+- **Hosting:** Cloudflare Pages
+
+### 4. Android App — Flutter
+
+- **Repo:** https://github.com/wikigoo/HMR-Flutter
+- **Framework:** [Flutter](https://github.com/flutter/flutter)
+- **Authentication:** Google Sign-In via Firebase + Google Cloud Console
+    - **Project ID:** `ir-hmrbot-app`
+    - **Project Number:** `829078792642`
+
+### 5. Monitoring — UptimeRobot
+#
+Monitored endpoints:
+
+- `hmrbot.com`
+- `hmrbot.com/api/health`
+- `srv.hmrbot.com`
+
+---
+
+---
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## HMR Project Links
