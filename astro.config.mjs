@@ -2,25 +2,29 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightAutoSidebar from 'starlight-auto-sidebar';
+import starlightSiteGraph from 'starlight-site-graph';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://book.hmrbot.com',
 	integrations: [
 		starlight({
 			title: 'HMR Book',
-				plugins: [starlightAutoSidebar()],
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			plugins: [
+				starlightAutoSidebar(),
+				starlightSiteGraph(),
+			],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/wikigoo/HMR-Book' }],
 			sidebar: [
-				{ label: 'Guides', items: [{ autogenerate: { directory: 'guides' } }] },
-				{ label: 'Astro', items: [{ autogenerate: { directory: 'astro' } }] },
-				{ label: 'Checklist', items: [{ autogenerate: { directory: 'Checklist' } }] },
-				{ label: 'Cloudflared', items: [{ autogenerate: { directory: 'cloudflared' } }] },
-				{ label: 'FlowiseAI', items: [{ autogenerate: { directory: 'flowiseai' } }] },
-				{ label: 'Flutter', items: [{ autogenerate: { directory: 'flutter' } }] },
-				{ label: 'Marketing', items: [{ autogenerate: { directory: 'Marketing' } }] },
-				{ label: 'Other', items: [{ autogenerate: { directory: 'Other' } }] },
-				{ label: 'Script', items: [{ autogenerate: { directory: 'Script' } }] },
-				{ label: 'UI', items: [{ autogenerate: { directory: 'UI' } }] },
+				{ label: 'Astro', collapsed: true, items: [{ autogenerate: { directory: 'astro' } }] },
+				{ label: 'Checklist', collapsed: true, items: [{ autogenerate: { directory: 'Checklist' } }] },
+				{ label: 'Cloudflared', collapsed: true, items: [{ autogenerate: { directory: 'cloudflared' } }] },
+				{ label: 'FlowiseAI', collapsed: true, items: [{ autogenerate: { directory: 'flowiseai' } }] },
+				{ label: 'Flutter', collapsed: true, items: [{ autogenerate: { directory: 'flutter' } }] },
+				{ label: 'Marketing', collapsed: true, items: [{ autogenerate: { directory: 'Marketing' } }] },
+				{ label: 'Other', collapsed: true, items: [{ autogenerate: { directory: 'Other' } }] },
+				{ label: 'Script', collapsed: true, items: [{ autogenerate: { directory: 'Script' } }] },
+				{ label: 'UI', collapsed: true, items: [{ autogenerate: { directory: 'UI' } }] },
 			],
 			customCss: ['./src/styles/custom.css'],
 		}),
