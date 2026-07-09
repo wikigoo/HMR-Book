@@ -1,88 +1,111 @@
 ---
-title: HMR BOOK
-description: Get started building your docs site with Starlight.
+title: HMR — Executive Project Blueprint
+description: Internal knowledge base and technical architecture guide for HMR (همر) project personnel.
 hero:
-  tagline: Internal encyclopedia of the HMR project
+  tagline: The internal encyclopedia & technical blueprint of the HMR project
   image:
     file: ../../assets/hmr.png
   actions:
     - text: HMR Web
       link: https://hmrbot.com/
       icon: external
+      variant: primary
+    - text: GitHub (wikigoo)
+      link: https://github.com/wikigoo
+      icon: github
       variant: minimal
 ---
 
-## Project Identity
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
-- **Name:** HMR (همر)
-- **Nature:** An AI mobile-hardware advisor chatbot for the Iranian market. It is an AI chatbot specialized in mobile technology.
-- **Role:** Advisor, not decision-maker.
-- **Platforms:** Website + Android application
-- **Users:** Persian-speaking
-#
-**Addresses:**
+## 1. Executive Summary & Core Identity
 
-- Site: https://hmrbot.com/ — pages: `/blog`, `/about`, `/contact`, `/privacy`, `/disclaimer`
-- Admin dashboard (FlowiseAI): https://srv.hmrbot.com/
-#
-## The Five Product Pillars
+**HMR (همر)** is an AI-powered **mobile-hardware advisor chatbot** engineered specifically for the
+Persian-speaking Iranian market. It bridges the gap between complex consumer electronics and everyday
+users by providing clear, data-driven guidance on buying, diagnosing, and maintaining mobile devices.
 
-1. New-phone buying guide
-2. Used-phone buying guide + fraud / counterfeit detection
-3. Hardware troubleshooting & fault diagnosis
-4. Hardware education
-5. Accessories guidance
-#
-## System Components & Repositories
+A foundational tenet of the project is its operating philosophy: **HMR acts strictly as a technical
+advisor, not a final decision-maker.** It empowers users with recommendations while leaving purchasing
+or repair decisions entirely in their hands. The service is delivered across a **dual-platform
+ecosystem** — a responsive web application and a native Android app.
 
-### 1. Chatbot Engine — FlowiseAI
-
-- **Base repo:** https://github.com/flowiseai/flowise
-- **Architecture:** Agentflows v2 / Multi-Agents ([docs](https://github.com/FlowiseAI/FlowiseDocs/blob/main/en/using-flowise/agentflowv1/multi-agents.md))
-- **Model connections:** via OpenRouter API
-    - **LLM:** `gemini-3.1-flash-lite`
-    - **Embedding:** `openai/text-embedding-3-large`
-    - **Rerank:** `google/semantic-ranker-default-004`
-
-### 2. Server — VPS
-
-- **Repo:** https://github.com/wikigoo/HMR-VPS
-- **Deployment:** Docker
-- **Specs:** Ubuntu 24.04 · 2-Core CPU · 4GB RAM · 40GB Storage · 1 IP · Nuremberg
-
-### 3. Website — Astro
-
-- **Repo:** https://github.com/wikigoo/HMR-Astro
-- **Framework:** [Astro](https://github.com/withastro/astro)
-- **Hosting:** Cloudflare Pages
-
-### 4. Android App — Flutter
-
-- **Repo:** https://github.com/wikigoo/HMR-Flutter
-- **Framework:** [Flutter](https://github.com/flutter/flutter)
-- **Authentication:** Google Sign-In via Firebase + Google Cloud Console
-    - **Project ID:** `ir-hmrbot-app`
-    - **Project Number:** `829078792642`
-
-### 5. Monitoring — UptimeRobot
-#
-Monitored endpoints:
-
-- `hmrbot.com`
-- `hmrbot.com/api/health`
-- `srv.hmrbot.com`
+| | |
+|---|---|
+| **Name** | HMR (همر) |
+| **Nature** | AI chatbot specialized in mobile technology |
+| **Role** | Advisor — not a decision-maker |
+| **Platforms** | Web application + Android application |
+| **Audience** | Persian-speaking users (Iranian market) |
+| **Language rule** | End-user output in **Persian**; docs & code in English |
+| **Honesty rule** | Never fabricate specs or prices — **live sources only** |
 
 ---
-import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## HMR Project Links
+## 2. The Five Product Pillars
+
+The product ecosystem supports users throughout the entire lifecycle of mobile-device ownership:
+
+<CardGrid>
+	<Card title="1 · New-Phone Buying Guide" icon="rocket">
+		Tailored recommendations to help users pick new devices that fit their budget and technical needs.
+	</Card>
+	<Card title="2 · Used-Phone Guide & Counterfeit Detection" icon="magnifier">
+		Diagnostic help for evaluating pre-owned devices and detecting counterfeit or refurbished hardware fraud.
+	</Card>
+	<Card title="3 · Troubleshooting & Fault Diagnosis" icon="warning">
+		Interactive workflows that isolate, identify, and explain hardware malfunctions and performance issues.
+	</Card>
+	<Card title="4 · Hardware Education" icon="open-book">
+		Accessible learning modules on processors, displays, battery chemistry, and internal components.
+	</Card>
+	<Card title="5 · Accessories Guidance" icon="setting">
+		Expert advice on compatible chargers, cables, protective gear, and quality peripherals.
+	</Card>
+</CardGrid>
+
+---
+
+## 3. Technical Architecture & System Components
+
+The project uses a decoupled, modern **Jamstack + micro-agent** architecture designed for performance,
+scalability, and ease of maintenance.
+
+| Component | Technology | Specifications & Configuration |
+| :--- | :--- | :--- |
+| **AI Chatbot Engine** | **FlowiseAI** | Agentflows v2 / Multi-Agents. Active chatflow: **`HMR-Agentflows-v2`**. Model routing via OpenRouter: LLM `gemini-3.1-flash-lite`, embeddings `openai/text-embedding-3-large`, reranker `google/semantic-ranker-default-004`. |
+| **Live Web Search** | **SearXNG** | Self-hosted metasearch (Docker container `docker-searxng-1`) powering the chatbot's live search tool — the backbone of the *live-price-only* rule. |
+| **Backend Server (VPS)** | **Docker / Ubuntu** | Containerized on Ubuntu 24.04. Nuremberg · 2-Core CPU · 4 GB RAM · 40 GB storage · 1 dedicated IP (`91.107.159.48`). |
+| **Web Application** | **Astro** | Modern SSG frontend, deployed globally via **Cloudflare** (Workers / Pages). |
+| **Android Application** | **Flutter** | Cross-platform build for Android. Auth via **Google Sign-In (Firebase + Google Cloud)** — Project ID `ir-hmrbot-app`, Project Number `829078792642`. |
+| **System Monitoring** | **UptimeRobot** | 24/7 uptime and health tracking across critical endpoints. |
+
+<Aside type="note" title="Security posture">
+The FlowiseAI prediction endpoint is **private** (`isPublic=0`). The `Authorization: Bearer` token is
+injected **server-side by nginx** and never ships in the public web bundle. Nightly encrypted backups of
+the Flowise data (`/root/.flowise`) run to Telegram, plus a nightly state snapshot to the `HMR-VPS` repo.
+</Aside>
+
+---
+
+## 4. Live Ecosystem & Endpoints
+
+The project relies on several specialized domains and subdomains to separate user-facing tools,
+backend administration, and internal documentation:
+
+| Endpoint | Purpose |
+| :--- | :--- |
+| `https://hmrbot.com/` | Main public web platform — incl. `/blog`, `/about`, `/contact`, `/privacy`, `/disclaimer` |
+| `https://hmrbot.com/ai` | Dedicated web interface for the Flutter-based AI chat advisor |
+| `https://hmrbot.com/admin` | General administrative management panel |
+| `https://srv.hmrbot.com/` | Backend API server + FlowiseAI admin dashboard |
+| `https://book.hmrbot.com/` | Official documentation & knowledge base (this site) |
 
 <CardGrid stagger>
 	<Card title="Main Site" icon="external">
 		[hmrbot.com](https://hmrbot.com/) — the public-facing HMR website.
 	</Card>
 	<Card title="Backend Server" icon="external">
-		[srv.hmrbot.com](https://srv.hmrbot.com/) — backend / API server.
+		[srv.hmrbot.com](https://srv.hmrbot.com/) — backend / API server + Flowise admin.
 	</Card>
 	<Card title="AI Advisor App" icon="external">
 		[hmrbot.com/ai](https://hmrbot.com/ai/) — the Flutter web chat advisor.
@@ -95,22 +118,44 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 </CardGrid>
 
-## HMR Project GitHub Repositories
+---
+
+## 5. Codebase & Version Control
+
+All infrastructure, application code, and documentation are version-controlled across **five dedicated
+GitHub repositories** under the **`wikigoo`** organization:
 
 <CardGrid stagger>
-	<Card title="HMR-Book" icon="github">
-		[github.com/wikigoo/HMR-Book](https://github.com/wikigoo/HMR-Book) — this documentation site.
-	</Card>
-	<Card title="HMR-VPS" icon="github">
-		[github.com/wikigoo/HMR-VPS](https://github.com/wikigoo/HMR-VPS) — server / infrastructure configuration.
-	</Card>
 	<Card title="HMR-Astro" icon="github">
-		[github.com/wikigoo/HMR-Astro](https://github.com/wikigoo/HMR-Astro) — the frontend, built with Astro on Cloudflare Workers.
+		[github.com/wikigoo/HMR-Astro](https://github.com/wikigoo/HMR-Astro) — public website, Astro on Cloudflare.
 	</Card>
 	<Card title="HMR-Flutter" icon="github">
-		[github.com/wikigoo/HMR-Flutter](https://github.com/wikigoo/HMR-Flutter) — the Flutter mobile app.
+		[github.com/wikigoo/HMR-Flutter](https://github.com/wikigoo/HMR-Flutter) — Flutter Android app + web advisor build.
+	</Card>
+	<Card title="HMR-VPS" icon="github">
+		[github.com/wikigoo/HMR-VPS](https://github.com/wikigoo/HMR-VPS) — server / infrastructure config, Docker, deploy scripts.
+	</Card>
+	<Card title="HMR-Book" icon="github">
+		[github.com/wikigoo/HMR-Book](https://github.com/wikigoo/HMR-Book) — this documentation site (`book.hmrbot.com`).
 	</Card>
 	<Card title="HMR-Design" icon="github">
-		[github.com/wikigoo/HMR-Design](https://github.com/wikigoo/HMR-Design) — design assets.
+		[github.com/wikigoo/HMR-Design](https://github.com/wikigoo/HMR-Design) — UI/UX assets, branding, design specs.
 	</Card>
 </CardGrid>
+
+---
+
+## 6. Reliability & Health Monitoring
+
+To ensure continuous availability for Persian-speaking users, system uptime is tracked 24/7 via
+**UptimeRobot**. Monitoring evaluates three primary endpoints to verify full-stack health:
+
+- **`hmrbot.com`** — frontend availability and Cloudflare routing.
+- **`hmrbot.com/api/health`** — core API gateway and internal response status.
+- **`srv.hmrbot.com`** — VPS, FlowiseAI engine, and LLM processing.
+
+<Aside type="tip" title="Last live verification — 2026-07-09">
+VPS healthy (uptime 12 d, disk ~29 %) · `docker-flowise-1` & `docker-searxng-1` healthy ·
+`srv.hmrbot.com` → HTTP 200 · prediction endpoint answering in Persian · nginx config valid ·
+TLS certs valid to Sep/Oct 2026 · nightly backups active.
+</Aside>
