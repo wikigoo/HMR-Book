@@ -1,3 +1,8 @@
+---
+title: How the Astro codebase uses logos and icons
+description: Where logos, favicons, and icons live in the HMR-Astro codebase and how each is referenced.
+---
+
 The Astro codebase uses logos and icons in several distinct contexts. Here is a breakdown of each.
 
 ---
