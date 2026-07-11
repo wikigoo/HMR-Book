@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Other/Link.md",
+                "file": "UI/Icon colors.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Link"
+              "title": "Icon colors"
             }
           }
         ]
@@ -182,6 +182,41 @@
   },
   "active": "63c6ab30686e28dc",
   "lastOpenFiles": [
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/templates-hero.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/style-guide-spacing.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/sketch-slices.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/sketch-ios-quick.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/sketch-install.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/scaling.gif",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/pixel-density-colours.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/photoshop-smart-objects.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/photoshop-slices.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/icon-masks.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/images/hashes.png",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/Install Sketch templates.command",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/Favicon - Web.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Microsoft Windows.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Microsoft Windows Tiles.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Google Android.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Google Android adaptive icon.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Apple watchOS.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Apple tvOS.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Apple macOS.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Sketch/App Icon - Apple macOS Big Sur.sketch",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/Version History.md",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/Style Guide.md",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/Scaling.md",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/License.md",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/Icon Sizes.md",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Help/Help.md",
+    "UI/PSD/Icon templet/Bjango-Templates-main/Readme.md",
+    "UI/PSD/Bjango-Templates-main/Help/Version History.md",
+    "UI/PSD/Bjango-Templates-main/Help/Style Guide.md",
+    "UI/PSD/Bjango-Templates-main/Help/Scaling.md",
+    "UI/PSD/Bjango-Templates-main/Help/License.md",
+    "UI/PSD/Bjango-Templates-main/Help/Icon Sizes.md",
+    "UI/PSD/Bjango-Templates-main/Help/Help.md",
+    "UI/PSD/Bjango-Templates-main/Readme.md",
     "Other/Link.md"
   ]
 }
