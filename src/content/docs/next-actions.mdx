@@ -5,4 +5,11 @@ description: Living tracker of outstanding action items and blockers for the HMR
 
 ## Open Action Items
 
+- [ ] 2026-07-11 — HMR-Flutter: rotate the signing keystore, purge the old keystore from git history, and enroll in Play App Signing (status: open, blocking: secure release; needs `keytool` + Play Console + history force-push — human only)
+- [ ] 2026-07-11 — HMR-Flutter: deploy the VPS reverse proxy so the Flowise API token can be removed from the client binary, then drop the `Authorization` header and repoint `_baseUrl` in `api_service.dart` (status: open, blocking: token-in-binary tech debt; needs VPS SSH — human only)
+- [ ] 2026-07-11 — HMR-Flutter: register the release SHA-1 / SHA-256 fingerprints in Google Cloud Console for the `ir-hmrbot-app` project (status: open, blocking: Google Sign-In on release builds; needs Google Cloud login — human only)
 - [ ] 2026-07-11 — Add/fix the `OPENROUTER_API_KEY` repository secret in HMR-Astro so the "Blog Auto-Generator" workflow can run (currently failing every run with `OPENROUTER_API_KEY is required for article generation`; also its Telegram failure-notification step is broken, returning 404 Not Found) (status: open, blocking: blog automation)
+
+## Done
+
+- [x] 2026-07-11 — HMR-Flutter: migrate `flutter_markdown` → `flutter_markdown_plus` (deprecated upstream) — shipped in PR #2; `pubspec.yaml` now pins `flutter_markdown_plus: ^1.0.7` and both imports are updated. Removed from the repo's stale pending-items list.
