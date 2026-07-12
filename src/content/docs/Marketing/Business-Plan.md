@@ -1,13 +1,11 @@
 ---
-title: "Business-Plan"
+title: " Business Plan — HMR (همر / Hamer)"
+description: |-
+  ### Specialized Mobile Smart Assistant for the Iranian Market
+  *Internal document — v2 | Audience: founding & engineering team*
 ---
 
-# Business Plan — HMR (همر / Hamer)
-### Specialized Mobile Smart Assistant for the Iranian Market
-*Internal document — v2 | Audience: founding & engineering team*
-
 ---
-
 ## 1. Executive Summary
 
 HMR is an AI conversational assistant that guides Persian-speaking users in Iran across the full mobile lifecycle: choosing a new or used phone, diagnosing hardware faults, learning how a device works, and selecting accessories.

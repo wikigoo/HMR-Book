@@ -1,8 +1,8 @@
 ---
-title: "Market-Iranian-Mobile-Chatbot-Hardware-Focus"
+title: Market-Iranian-Mobile-Chatbot-Hardware-Focus
+description: "Strategic Analysis and Product Blueprint: Smart Mobile Guide Chatbot Assistant for the Iranian Hardware Market"
 ---
 
-# **Strategic Analysis and Product Blueprint: Smart Mobile Guide Chatbot Assistant for the Iranian Hardware Market**
 
 ## **1\. Macro-Environmental Context and the 2026 Economic Landscape**
 

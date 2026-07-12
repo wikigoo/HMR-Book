@@ -1,9 +1,7 @@
 ---
-title: "Publish Application Checklist"
+title: Publish Application Checklist
+description: Here is the comprehensive pre-launch checklist translated into English, organized logically, and enhanced with a few crucial additional steps (marked as **[NEW]**) that professionals always verify before pushing an app to production.
 ---
-
-Here is the comprehensive pre-launch checklist translated into English, organized logically, and enhanced with a few crucial additional steps (marked as **[NEW]**) that professionals always verify before pushing an app to production.
-
 ## 🚀 Pre-Launch Checklist for HMR App & Infrastructure
 
 ### 1. Flutter App & UI/UX Optimization

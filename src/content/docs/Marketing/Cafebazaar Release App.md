@@ -1,7 +1,6 @@
 ---
 title: "cafebazaar-description"
 ---
-
 # توضیحات اپلیکیشن HMR برای کافه بازار
 
 ---

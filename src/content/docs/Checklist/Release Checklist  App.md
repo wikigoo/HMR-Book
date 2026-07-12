@@ -1,6 +1,6 @@
 ---
-title: "چک‌لیست انتشار اپلیکیشن و سایت — 2026-07-09 (۱۴۰۵/۰۴/۱۸)"
-description: "چک‌لیست کامل موارد ضروری برای انتشار اپ اندروید (Flutter) و سایت (Astro/Cloudflare) پروژه HMR — تهیه‌شده در ۲۰۲۶-۰۷-۰۹."
+title: Release Checklist  App
+description: Complete checklist of essentials for publishing the HMR project's Android app (Flutter) and website (Astro/Cloudflare)
 ---
 
 راهنمای علامت‌ها: 🔴 **مسدودکننده** (بدون آن انتشار نکن) · 🟡 **مهم** · 🟢 **توصیه‌شده**.
@@ -97,4 +97,4 @@ description: "چک‌لیست کامل موارد ضروری برای انتشا
 
 ---
 
-*تهیه‌شده در 2026-07-09 (۱۴۰۵/۰۴/۱۸) — سیستم چند‌ایجنتی HMR.*
+
