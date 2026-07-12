@@ -1,9 +1,7 @@
 ---
-title: "FlowiseAI Prompt System Structure"
+title: FlowiseAI Prompt System Structure
+description: "FlowiseAI Prompt System: Structure, Explanation & Recipe Template"
 ---
-
-## FlowiseAI Prompt System: Structure, Explanation & Recipe Template
-
 ---
 
 ## 1. What Is the FlowiseAI Prompt System?

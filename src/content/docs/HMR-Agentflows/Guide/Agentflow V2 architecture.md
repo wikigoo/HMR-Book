@@ -1,8 +1,9 @@
 ---
-title: "Flowise's Agentflow V2"
+title: Flowise's Agentflow V2
+description: Here is a comprehensive technical analysis of the described Agentflows architecture, grounded in how Flowise's Agentflow V2 actually works.
 ---
 
-Here is a comprehensive technical analysis of the described Agentflows architecture, grounded in how Flowise's Agentflow V2 actually works.
+
 
 ---
 

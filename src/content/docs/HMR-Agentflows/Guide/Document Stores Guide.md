@@ -1,8 +1,7 @@
 ---
-title: "Complete-Guide-to-Document-Stores-in-FlowiseAI"
+title: Document Stores
+description: Complete Guide to Document Stores in FlowiseAI
 ---
-
-# Complete Guide to Document Stores in FlowiseAI
 
 ---
 

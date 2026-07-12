@@ -1,9 +1,7 @@
 ---
-title: "Complete Guide_ Flowise Multi-Agent Architecture (Supervisor + Worker)_"
+title: Multi-Agent (Supervisor + Worker)
+description: Complete Guide_ Flowise Multi-Agent Architecture (Supervisor + Worker)
 ---
-
-# **Complete Guide: Flowise Multi-Agent Architecture (Supervisor \+ Worker)**
-
 ---
 
 ## **1\. Overview**

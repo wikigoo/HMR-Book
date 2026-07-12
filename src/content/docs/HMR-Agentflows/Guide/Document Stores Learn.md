@@ -2,7 +2,6 @@
 title: "document-stores"
 description: Learn how to use the Flowise Document Stores, written by @toi500
 ---
-
 # Document Stores
 
 ***

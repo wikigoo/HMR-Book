@@ -1,10 +1,7 @@
 ---
-title: "Agentflow V2"
-source: "https://docs.flowiseai.com/using-flowise/agentflowv2"
-author:
-description: "Learn how to build multi-agents system using Agentflow V2, written by @toi500"
-tags:
-  - "samsung"
+title: Agentflow V2
+source: https://docs.flowiseai.com/using-flowise/agentflowv2
+description: Learn how to build multi-agents system using Agentflow V2, written by @toi500
 ---
 This guide explores the AgentFlow V2 architecture, detailing its core concepts, use cases, Flow State, and comprehensive node references.
 
