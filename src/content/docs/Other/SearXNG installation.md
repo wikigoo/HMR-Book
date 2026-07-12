@@ -1,9 +1,7 @@
 ---
-title: "Step by step installation - SearXNG Documentation (2026.7.3+747cec4c2)"
-description: "Step-by-step SearXNG installation guide."
-source: "https://docs.searxng.org/admin/installation-searxng.html#installation-basic"
-tags:
-  - "samsung"
+title: Step by step installation - SearXNG Documentation (2026.7.3+747cec4c2)
+description: Step-by-step SearXNG installation guide.
+source: https://docs.searxng.org/admin/installation-searxng.html#installation-basic
 ---
 ## Step by step installation
 
