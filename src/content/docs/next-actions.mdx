@@ -5,6 +5,27 @@ description: Living tracker of outstanding action items and blockers for the HMR
 
 ## Open Action Items
 
+### Server migration follow-ups (2026-07-13)
+
+- [ ] 2026-07-13 — 🔴 **Server.ir wallet top-up.** Balance ﷼628,800 ≪ monthly renewal ﷼22,871,200. Auto-renew will FAIL before due date **1405/05/21** and the new production box is lost. (status: open, blocking: keeping the new server; human only — money)
+- [ ] 2026-07-13 — 🔴 **Decommission old server `91.107.159.48`** after a 48–72h grace window (target ≥ 2026-07-15). Take a final backup first; then stop/delete via Hetzner. Rollback (revert Cloudflare `srv` A record to old IP) is available until this is done. (status: open, needs explicit human confirmation)
+- [ ] 2026-07-13 — Disable `PasswordAuthentication` in `sshd_config` on the new server (`5.75.207.85`). Key auth is confirmed stable; this was the deliberately-deferred last step of Phase 1. (status: open, low-risk)
+- [ ] 2026-07-13 — Repoint the local `hmrbot-server` SSH alias from the old IP to `5.75.207.85` (currently still points at the old box). Owner is tracking this in their personal to-do. (status: open)
+- [ ] 2026-07-13 — Decide on **Buy Terminal** (Server.ir, ﷼30,000,000 one-time) — a national-internet SSH fallback if the German IP becomes unreachable from Iran. Optional; test plain SSH stability first. (status: open; human only — money)
+- [ ] 2026-07-13 — After decommission: remove the old server's leftover repo/CI access — the old `hmr-vps-server` **read-only deploy key** on HMR-VPS and any stale `authorized_keys`. The new key `hmr-vps-server-new` stays. (status: open, cleanup)
+
+### Design system (SSOT) follow-ups (2026-07-13)
+
+- [ ] 2026-07-13 — Decide whether to align the minor **Flutter text-color drift** with the tokens: `AppTheme.textPrimary` is pure white `#FFFFFF` (token `--hmr-text` is `#EAF2FF`) and `textBody` `#E2E8F0` (token `--hmr-text-2` is `#B9C6E4`). Deliberate app choices today; decide keep-vs-align. (status: open, cosmetic)
+- [ ] 2026-07-13 — Optional: extend the Astro token-sync to also vendor the **shared components** (`GlassCard`/`Button`/`Badge`) from HMR-Design, not just tokens. (status: open, optional)
+
+### Repo structure & review (2026-07-13)
+
+- [ ] 2026-07-13 — 🔵 **RAG structure decision blocked on owner input:** what imposed the per-brand file-count limit that originally split Apple/Samsung/Xiaomi into separate repos (GitHub? the ingestion tool? the Flowise document-store)? Recommendation is one repo with per-brand folders (Flowise doc-stores stay separate regardless), pending this answer. (status: open, needs owner info)
+- [ ] 2026-07-13 — Broader doc-accuracy pass over HMR-Book / HMR-RAG / HMR-Design / HMR-Ops READMEs. Server-reference staleness is already resolved (FACTS.md fixed; other "Hetzner" mentions are still accurate — the datacenter is unchanged). (status: open, low priority)
+
+### Pre-existing
+
 - [ ] 2026-07-11 — HMR-Flutter: rotate the signing keystore, purge the old keystore from git history, and enroll in Play App Signing (status: open, blocking: secure release; needs `keytool` + Play Console + history force-push — human only)
 - [ ] 2026-07-11 — HMR-Flutter: deploy the VPS reverse proxy so the Flowise API token can be removed from the client binary, then drop the `Authorization` header and repoint `_baseUrl` in `api_service.dart` (status: open, blocking: token-in-binary tech debt; needs VPS SSH — human only)
 - [ ] 2026-07-11 — HMR-Flutter: register the release SHA-1 / SHA-256 fingerprints in Google Cloud Console for the `ir-hmrbot-app` project (status: open, blocking: Google Sign-In on release builds; needs Google Cloud login — human only)
@@ -12,4 +33,7 @@ description: Living tracker of outstanding action items and blockers for the HMR
 
 ## Done
 
+- [x] 2026-07-13 — **Server migration to Server.ir (`5.75.207.85`)** — phases 1–9 complete: access/hardening, Docker+nginx, consistent data transfer (incl. encryption key + RAG), deploy, end-to-end verify, DNS cutover (`srv.hmrbot.com` A → new IP, proxied), and CI re-point (backup/snapshot/deploy workflows → new host, verified green). Production traffic now on the new server; old box kept as rollback. Full log: `reports/2026-07-13-vps-migration-checklist.mdx`.
+- [x] 2026-07-13 — **FACTS.md updated** for the new server (provider Server.ir, IPv4 `5.75.207.85`, IPv6 block, migration note) — HMR-Ops PR #1 merged.
+- [x] 2026-07-13 — **HMR-Design established as design SSOT.** HMR-Astro #101 (CSS token sync `npm run sync:tokens` + drift-check CI) and HMR-Flutter #17 (`tool/gen_tokens.sh` → `app_colors.g.dart` generator, `app_theme.dart` base hues reference `HmrTokens`, drift-check CI) — both merged, drift checks green, Flutter web build green (no visual change).
 - [x] 2026-07-11 — HMR-Flutter: migrate `flutter_markdown` → `flutter_markdown_plus` (deprecated upstream) — shipped in PR #2; `pubspec.yaml` now pins `flutter_markdown_plus: ^1.0.7` and both imports are updated. Removed from the repo's stale pending-items list.
