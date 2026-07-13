@@ -36,6 +36,33 @@ and `STATE.md` snapshot 2026-07-12T22:56Z.
 
 ---
 
+## Execution status — updated 2026-07-13
+
+Migration executed the same day. **Production traffic is now served by the new server**
+(`5.75.207.85`). The old server is kept untouched as an instant rollback.
+
+| Phase | Status | Evidence |
+|---|---|---|
+| 1 Access & hardening | ✅ done | key-based SSH; `apt upgrade` + reboot to kernel 6.8.0-134; ufw (22/80/443, v4+v6) verified with outbound tests |
+| 2 Docker + nginx | ✅ done | Docker 29.6.1, Compose v5.3.1, nginx 1.24.0; `hello-world` OK |
+| 3 Backup | ✅ done | consistent `sqlite3 .backup`; archives saved locally under `HMR-Tools/HMR-Backup` |
+| 4 Transfer | ✅ done | scp relay old → local → new (secrets never left owner's machine) |
+| 5 Deploy | ✅ done | both containers healthy; `encryption.key` + `faiss` migrated |
+| 6 Verify (pre-DNS) | ✅ done | `curl --resolve` prediction → 200; OpenRouter creds decrypt; RAG answers correct |
+| 7 DNS cutover | ✅ done | `srv.hmrbot.com` A `91.107.159.48` → `5.75.207.85` (kept Proxied), applied by owner in Cloudflare |
+| 8 Post-cutover verify | ✅ done | unique-token request logged on NEW origin only; public prediction via Cloudflare → 200 |
+| 9 Re-point monitoring & backups | ✅ done | backup/snapshot/deploy are GitHub Actions (not cron): authorized CI key on new box, registered a read-only deploy key + cloned `/opt/hmr-vps`, set `VPS_HOST`→new IP; test-ran Daily Backup + State Snapshot → both success (fresh STATE.md committed 2026-07-13T09:27Z). UptimeRobot needs no change (monitors go via Cloudflare). |
+| 10 Decommission old server | ⏸ deferred | wait 48–72h grace period; requires separate explicit owner confirmation |
+
+Notes:
+- New box versions are slightly newer than the old (Docker 29.6.1 vs 29.5.3, Compose v5.3.1 vs
+  5.1.4) — compatible; images pinned (`flowiseai/flowise:3.1.3`).
+- nginx config was reproduced from the old server's `/opt/hmr-vps` tree; a proper `git clone`
+  of HMR-VPS on the new box is a Phase 9/follow-up cleanup.
+- Rollback remains available until Phase 10: revert the Cloudflare A record to `91.107.159.48`.
+
+---
+
 ## Phase 0 — Prerequisites
 
 - [ ] 🔴 **Top up the Server.ir wallet.** Balance (628,800 ﷼) is far below the monthly
