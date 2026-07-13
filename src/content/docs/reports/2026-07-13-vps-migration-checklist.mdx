@@ -51,7 +51,7 @@ Migration executed the same day. **Production traffic is now served by the new s
 | 6 Verify (pre-DNS) | ✅ done | `curl --resolve` prediction → 200; OpenRouter creds decrypt; RAG answers correct |
 | 7 DNS cutover | ✅ done | `srv.hmrbot.com` A `91.107.159.48` → `5.75.207.85` (kept Proxied), applied by owner in Cloudflare |
 | 8 Post-cutover verify | ✅ done | unique-token request logged on NEW origin only; public prediction via Cloudflare → 200 |
-| 9 Re-point monitoring & backups | ⏳ pending | install `backup_flowise.sh` + `snapshot_state.sh` cron on new server |
+| 9 Re-point monitoring & backups | ✅ done | backup/snapshot/deploy are GitHub Actions (not cron): authorized CI key on new box, registered a read-only deploy key + cloned `/opt/hmr-vps`, set `VPS_HOST`→new IP; test-ran Daily Backup + State Snapshot → both success (fresh STATE.md committed 2026-07-13T09:27Z). UptimeRobot needs no change (monitors go via Cloudflare). |
 | 10 Decommission old server | ⏸ deferred | wait 48–72h grace period; requires separate explicit owner confirmation |
 
 Notes:
