@@ -1,8 +1,8 @@
 ---
-title: "Startup Steps from Idea to Launch"
+title: Startup Steps from Idea to Launch
+description: in 9 Phase
 ---
 
-# 🚀 Startup Steps from Idea to Launch
 
 ## 📍 Phase 1: Ideation and Research (Weeks 1-4)
 

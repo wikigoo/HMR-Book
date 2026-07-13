@@ -1,8 +1,6 @@
 ---
 title: " Business Plan — HMR (همر / Hamer)"
-description: |-
-  ### Specialized Mobile Smart Assistant for the Iranian Market
-  *Internal document — v2 | Audience: founding & engineering team*
+description: Specialized Mobile Smart Assistant for the Iranian Market
 ---
 
 ---

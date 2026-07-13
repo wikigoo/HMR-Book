@@ -1,5 +1,6 @@
 ---
-title: "cafebazaar-description"
+title: cafebazaar-description
+description: cafebazaar description app
 ---
 # توضیحات اپلیکیشن HMR برای کافه بازار
 

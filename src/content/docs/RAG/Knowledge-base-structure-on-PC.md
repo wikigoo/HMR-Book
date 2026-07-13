@@ -1,8 +1,8 @@
 ---
-title: "Knowledge-base-structure-on-PC"
+title: Knowledge-base-structure-on-PC
+description: " Building and Maintaining a Knowledge Base for an AI Chatbot: A Comprehensive Guide"
 ---
-
-# **Building and Maintaining a Knowledge Base for an AI Chatbot: A Comprehensive Guide**
+ **Building and Maintaining a Knowledge Base for an AI Chatbot: A Comprehensive Guide**
 
 ## **1\. Introduction**
 
