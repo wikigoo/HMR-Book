@@ -21,13 +21,23 @@ CLI to python3's stdlib sqlite3 module (read-only, `mode=ro`) and make any DB fa
 non-zero so the GitHub Action goes red. **After merge:** run `workflow_dispatch` on
 `state-snapshot.yml` to live-verify.
 
-### Move hardcoded prediction token out of `.github/workflows/state-snapshot.yml` (HMR-VPS)
+### Delete the old Flowise API key `nginx-proxy`
 **Status:** `open` (2026-07-14)  
-**Evidence:** Security review — file contains plaintext nginx auth token as a grep pattern  
-**Detail:** The "Secret scan" step hardcodes the real nginx prediction token in plaintext as a
-grep pattern — the anti-leak rule itself contains the secret. HMR-VPS is a **private** repo so
-there is no public exposure, but this violates the charter's "secrets are never committed" rule.
-Should move to a GitHub Actions secret and rotate. Do NOT write the token value into this file.
+**Evidence:** Rotation complete; the old key is still valid in the Flowise panel  
+**Detail:** Final step of the token rotation. The production chatflow no longer uses it and nginx
+no longer sends it. Delete it from the Flowise admin panel (UI, not the DB — Flowise caches keys
+in memory, so a direct DB delete could leave the running app inconsistent).
+
+### Hardcoded prediction token in `state-snapshot.yml` (HMR-VPS)
+**Status:** `in-progress` (2026-07-14) — rotation done, [PR #9](https://github.com/wikigoo/HMR-VPS/pull/9) open  
+**Evidence:** The committed value matched `apikey.apiKey` of the `nginx-proxy` key that the production chatflow was bound to — it was the **live** token, not a stale one  
+**Detail:** The "Secret scan" step hardcoded the real token as a grep pattern, so the anti-leak
+rule was itself the leak. **Rotated:** owner created Flowise key `nginx-proxy-2` and rebound the
+chatflow; `/etc/nginx/hmr-auth.conf` backed up to `/root/hmr-auth.conf.bak-20260714`, rewritten
+(mode 600, out of git), nginx tested and reloaded; verified end-to-end with an unauthenticated
+POST to the public prediction endpoint → **HTTP 200** with a valid Persian reply. PR #9 replaces
+the exact-match rule with generic bearer/API-key patterns so no secret lives in the repo at all.
+Because the key was rotated, the old value still in git history is **dead** — no history rewrite needed.
 
 ### RAG corpus is ~99% Apple
 **Status:** `open` (2026-07-14)  
