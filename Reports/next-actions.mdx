@@ -29,12 +29,6 @@ grep pattern — the anti-leak rule itself contains the secret. HMR-VPS is a **p
 there is no public exposure, but this violates the charter's "secrets are never committed" rule.
 Should move to a GitHub Actions secret and rotate. Do NOT write the token value into this file.
 
-### Close HMR-Book PR #5 ("Add Cloudflare Workers configuration")
-**Status:** `open` (2026-07-14)  
-**Evidence:** PR was opened by the Cloudflare autoconfig bot; book.hmrbot.com site removed  
-**Detail:** The PR would configure a Cloudflare Workers deployment that no longer exists —
-book.hmrbot.com was removed by the owner on 2026-07-14. Close without merge.
-
 ### RAG corpus is ~99% Apple
 **Status:** `open` (2026-07-14)  
 **Evidence:** INDEX.md audit from the 2026-07-13 session report (apple **757** vs samsung **3** vs xiaomi **2**)  
@@ -56,6 +50,13 @@ the local `hmrbot-server` SSH alias (it still points at the old box; the new box
 ---
 
 ## Completed
+
+### Close HMR-Book PR #5 ("Add Cloudflare Workers configuration")
+**Status:** `done` (2026-07-14)  
+**Evidence:** PR #5 closed without merge; HMR-Book now has no open PRs  
+**Detail:** Opened by the Cloudflare autoconfig bot. It would have configured a Cloudflare Workers
+deployment for book.hmrbot.com — a site the owner removed on 2026-07-14 — so merging it would have
+re-introduced config for a deployment that no longer exists. Closed, not merged.
 
 ### book.hmrbot.com site removed
 **Status:** `done` (2026-07-14)  
