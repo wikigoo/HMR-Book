@@ -11,8 +11,38 @@ Each item cites its evidence.
 
 ## Open & In-Progress
 
+### Merge HMR-VPS PR #10 — every production deploy is failing
+**Status:** `in-progress` (2026-07-14) — [PR #10](https://github.com/wikigoo/HMR-VPS/pull/10) open, awaiting merge  
+**Evidence:** Two `Deploy to VPS` runs today both failed with `cp: '.../nginx/sites-available/hmrbot.conf' and '/etc/nginx/sites-enabled/flowise' are the same file`  
+**Detail:** On the new Server.ir box, `/etc/nginx/sites-enabled/flowise` is a symlink pointing straight
+into the git checkout (`/opt/hmr-vps/nginx/sites-available/hmrbot.conf`), so `deploy.yml`'s
+`cp "$REPO/.../hmrbot.conf" "$SITE"` is a self-copy and aborts under `set -e`. This has been broken
+since the 2026-07-13 migration; it only surfaced today because these were the first non-snapshot
+commits to reach `main`. **Production was never broken — the script dies before touching nginx — but
+no config change has deployed since the migration.** PR #10 makes the step self-healing (install to a
+real file at `sites-available/hmrbot.conf`, then `ln -sfn` the symlink at it) and fixes the rollback
+path, which previously wrote back through the symlink into the checkout.
+
+### Verify the snapshot fix live
+**Status:** `open` (2026-07-14)  
+**Evidence:** PR #6 is merged, but `STATE.md` on `main` still shows `?` for every Flowise count — the
+snapshot workflow has not run since 2026-07-13T23:00  
+**Detail:** Run `state-snapshot.yml` via `workflow_dispatch`. Expected: real counts and all three flows
+(`HMR-Agentflows-v2`, `HMR-Agentflows-v3`, `Supervisor Worker Agents.json`). If the fix is wrong the job
+now goes **red** instead of silently committing a hollow snapshot — that loud failure is the point of the fix.
+
+### Add `OPENROUTER_API_KEY` secret to HMR-Astro
+**Status:** `open` (2026-07-14)  
+**Evidence:** From the owner's to-do; the Blog Auto-Generator workflow has never run successfully  
+**Detail:** Then: 2 auto-generated blog posts/week, plus a skill for generating posts on demand.
+
+### Declare OAuth scopes on the consent screen
+**Status:** `open` (2026-07-14)  
+**Evidence:** Google Cloud → Data Access for `ir-hmrbot-app` shows "No rows to display" in all three scope categories  
+**Detail:** The app requests `email` and `profile`. Adding `userinfo.email` / `userinfo.profile` explicitly is cleaner and avoids surprises.
+
 ### Merge HMR-VPS PR #6 — nightly snapshot is broken
-**Status:** `in-progress` (2026-07-14)  
+**Status:** `done` (2026-07-14) — merged by the owner  
 **Evidence:** PR open, awaiting human merge  
 **Detail:** The `sqlite3` CLI is not installed on the new Server.ir box (5.75.207.85). The
 `scripts/snapshot_state.sh` script silently wrote `?` for every Flowise count and exported zero
@@ -59,6 +89,35 @@ the local `hmrbot-server` SSH alias (it still points at the old box; the new box
 ---
 
 ## Completed
+
+### Google Sign-In was broken on the web
+**Status:** `done` (2026-07-14) — fixed, deployed, and confirmed working by the owner  
+**Evidence:** Google Cloud showed the **People API disabled** in `ir-hmrbot-app`; the Audience page read "0 users / 100 user cap" — nobody had ever completed a sign-in  
+**Detail:** One root cause, not two. `AuthProvider.init()` skipped `signInSilently()` on web (guarding
+against a FedCM loop that, on reading the plugin source, **does not exist** — `signInSilently()` defaults
+to `suppressErrors: true` and resolves failed prompts to `null`). With it skipped, the plugin's
+`_lastCredentialResponse` was always null, so `signIn()` fell back to synthesizing the profile from the
+**People API** — which was disabled. A catch-all `catch` then told users "check your internet connection",
+which is why a config error masqueraded as a network fault and went undiagnosed.
+
+That one skip caused **both** symptoms: sign-in failing, and (once it worked) the user being logged out on
+every reload, since `signInSilently()` is the only session-restore mechanism GIS offers on the web.
+
+Android was never affected — it uses native GMS, needs no People API, and its release SHA-1 was already
+registered (verified: keystore SHA-1 matches OAuth client `…og77…`). The `CLAUDE.md` item claiming SHA
+registration was still pending was stale, and has been corrected.
+
+Fixed by: enabling the People API (owner-authorized), and migrating the web path to the GIS `renderButton`
++ `signInSilently()` (HMR-Flutter `e95e365`, `7819f79` — the latter also guards `init()` against re-entry,
+which could otherwise double-subscribe the user-changes stream). Deployed via `Deploy Flutter Web to /ai`.
+
+### Docs claimed auth ran "via Firebase"
+**Status:** `done` (2026-07-14) — [HMR-Ops PR #3](https://github.com/wikigoo/HMR-Ops/pull/3) open; HMR-Flutter `81f3833` pushed  
+**Evidence:** `HMR-Flutter` has no `firebase_auth` / `firebase_core` dependency at all  
+**Detail:** Worse than a stale fact: FACTS.md instructed agents to "fix on sight" any doc describing the
+auth as "Firebase-free" — which was the **correct** description. The rule actively pushed correct docs
+toward the error. Both FACTS.md and HMR-Flutter's CLAUDE.md now say Google Identity Services, and record
+that web sign-in depends on the People API staying enabled.
 
 ### Close HMR-Book PR #5 ("Add Cloudflare Workers configuration")
 **Status:** `done` (2026-07-14)  
