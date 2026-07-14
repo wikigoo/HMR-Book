@@ -1,26 +1,10 @@
----
-title: HMR
-description: "Executive Project Blueprint — internal knowledge base and technical architecture guide for HMR (همر) project personnel."
-hero:
-  tagline: The internal encyclopedia & technical blueprint of the HMR project
-image:
-    file: ../../assets/houston.webp
-    actions:
-    - text: HMR Web
-      link: https://hmrbot.com/
-      icon: external
-      variant: primary
-    - text: Try the AI Advisor
-      link: https://hmrbot.com/ai/
-      icon: rocket
-      variant: secondary
-    - text: GitHub (wikigoo)
-      link: https://github.com/wikigoo
-      icon: github
-      variant: minimal
----
 
-import { Card, CardGrid, Aside, Steps, Badge } from '@astrojs/starlight/components';
+# HMR
+## Executive Project Blueprint — internal knowledge base and technical architecture guide for HMR (همر) project personnel.The internal encyclopedia & technical blueprint of the HMR project
+
+https://hmrbot.com/
+
+https://hmrbot.com/ai/
 
 ## 1. Executive Summary & Core Identity
 
