@@ -1,0 +1,63 @@
+---
+title: Next Actions — Open Items & Blockers
+description: Living tracker of open actions, blockers, and completed items. Newest items on top, each dated and marked with status. Evidence cited for each.
+---
+
+A single living page of actions, blockers, and completed work. Newest items on top. Status values:
+`open` (not started) · `in-progress` (underway, awaiting external or human action) · `done` (completed).
+Each item cites its evidence.
+
+---
+
+## Open & In-Progress
+
+### Merge HMR-VPS PR #6 — nightly snapshot is broken
+**Status:** `in-progress` (2026-07-14)  
+**Evidence:** PR open, awaiting human merge  
+**Detail:** The `sqlite3` CLI is not installed on the new Server.ir box (5.75.207.85). The
+`scripts/snapshot_state.sh` script silently wrote `?` for every Flowise count and exported zero
+flows, while still exiting 0 and committing a hollow STATE.md nightly. Fix: move DB access from
+CLI to python3's stdlib sqlite3 module (read-only, `mode=ro`) and make any DB failure exit
+non-zero so the GitHub Action goes red. **After merge:** run `workflow_dispatch` on
+`state-snapshot.yml` to live-verify.
+
+### Move hardcoded prediction token out of `.github/workflows/state-snapshot.yml` (HMR-VPS)
+**Status:** `open` (2026-07-14)  
+**Evidence:** Security review — file contains plaintext nginx auth token as a grep pattern  
+**Detail:** The "Secret scan" step hardcodes the real nginx prediction token in plaintext as a
+grep pattern — the anti-leak rule itself contains the secret. HMR-VPS is a **private** repo so
+there is no public exposure, but this violates the charter's "secrets are never committed" rule.
+Should move to a GitHub Actions secret and rotate. Do NOT write the token value into this file.
+
+### Close HMR-Book PR #5 ("Add Cloudflare Workers configuration")
+**Status:** `open` (2026-07-14)  
+**Evidence:** PR was opened by the Cloudflare autoconfig bot; book.hmrbot.com site removed  
+**Detail:** The PR would configure a Cloudflare Workers deployment that no longer exists —
+book.hmrbot.com was removed by the owner on 2026-07-14. Close without merge.
+
+### RAG corpus is ~99% Apple
+**Status:** `open` (2026-07-14)  
+**Evidence:** INDEX.md audit from the 2026-07-13 session report (apple **757** vs samsung **3** vs xiaomi **2**)  
+**Detail:** Samsung and Xiaomi sources still need to be added to HMR-RAG to balance the corpus.
+Also: 622 legacy files lack frontmatter, casing drifts need normalization, and Flowise re-upsert is not yet wired.
+
+### Decommission the old VPS (`91.107.159.48`)
+**Status:** `open` (2026-07-14)  
+**Evidence:** VPS migration completed 2026-07-13; old box kept as rollback  
+**Detail:** Kept as rollback after the 2026-07-13 migration to Server.ir. When ready:
+delete the stale `hmr-vps-server` deploy key, remove old `authorized_keys` entries, and repoint/retire
+the local `hmrbot-server` SSH alias (it still points at the old box; the new box key is `~/.ssh/hmr4vps`).
+
+### Disable `PasswordAuthentication` on the new VPS
+**Status:** `open` (2026-07-14)  
+**Evidence:** SSH key confirmed working on 5.75.207.85; no security breach risk  
+**Detail:** Final hardening step. The SSH key is confirmed working, so password auth can be safely disabled.
+
+---
+
+## Completed
+
+### book.hmrbot.com site removed
+**Status:** `done` (2026-07-14)  
+**Evidence:** HMR-Book repo audit confirms no `.github/workflows` directory; FACTS.md and SUPERVISOR.md corrected via HMR-Ops PR #2  
+**Detail:** HMR-Book is now a git-only docs repo with no published site. The book.hmrbot.com website was removed by the owner on 2026-07-14. Documentation updated to reflect the change.
