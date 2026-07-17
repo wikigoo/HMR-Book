@@ -4,11 +4,10 @@
 
 ### ۱. تنظیمات Google Cloud Console
 
-در بخش **OAuth 2.0 Client IDs**:
-```
+در بخش **
 - **Authorized JavaScript origins:** `https://hmrbot.com` (و `http://localhost:4321` برای تست)
 - **Authorized redirect URIs:** `https://hmrbot.com/api/auth/callback/google`
-```
+
 ---
 
 ### ۲. تنظیم متغیرها در Cloudflare (محیط Production)
@@ -60,13 +59,13 @@ Generated code may be subject to license restrictions not shown here. Use code w
 #### ب) ایجاد مسیر API (هندلر اصلی)
 
 فایل را در این مسیر بسازید: **`src/pages/api/auth/[...auth].ts`**
-
+```
  import { Auth } from "auth-astro";
 
 export const { GET, POST } \= Auth;
 
 Generated code may be subject to license restrictions not shown here. Use code with care. [Learn more](https://cloud.google.com/duet-ai/docs/discover/code-generation-source-citation#how_helps_with_coding)
-
+```
 ---
 
 ### ۴. طراحی صفحه هوشمند چت‌بات (src/pages/ai.astro)
