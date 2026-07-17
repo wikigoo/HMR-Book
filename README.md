@@ -139,26 +139,18 @@ backend administration, and internal documentation:
 | `https://srv.hmrbot.com/` | Backend API server + FlowiseAI admin dashboard |
 | `https://book.hmrbot.com/` | Official documentation & knowledge base (this site) |
 
-<CardGrid stagger>
-	<Card title="Main Site" icon="external">
-		[hmrbot.com](https://hmrbot.com/) — the public-facing HMR website.
-	</Card>
-	<Card title="AI Advisor" icon="rocket">
-		[hmrbot.com/ai](https://hmrbot.com/ai/) — the Flutter web chat advisor.
-	</Card>
-	<Card title="Backend Server" icon="setting">
-		[srv.hmrbot.com](https://srv.hmrbot.com/) — backend / API server + Flowise admin.
-	</Card>
-	<Card title="Documentation" icon="open-book">
-		[book.hmrbot.com](https://book.hmrbot.com/) — this knowledge base.
-	</Card>
-	<Card title="Admin Dashboard" icon="seti:lock">
-		[hmrbot.com/admin](https://hmrbot.com/admin) — the site admin panel.
-	</Card>
-	<Card title="Blog" icon="pencil">
-		[hmrbot.com/blog](https://hmrbot.com/blog) — articles & product updates.
-	</Card>
-</CardGrid>
+
+[hmrbot.com](https://hmrbot.com/) — the public-facing HMR website.
+
+[hmrbot.com/ai](https://hmrbot.com/ai/) — the Flutter web chat advisor.
+
+[srv.hmrbot.com](https://srv.hmrbot.com/) — backend / API server + Flowise admin.
+
+[book.hmrbot.com](https://book.hmrbot.com/) — this knowledge base.
+
+[hmrbot.com/admin](https://hmrbot.com/admin) — the site admin panel.
+
+[hmrbot.com/blog](https://hmrbot.com/blog) — articles & product updates.
 
 ---
 
@@ -168,26 +160,18 @@ All infrastructure, application code, design assets, and documentation are versi
 **six dedicated GitHub repositories** under the **`wikigoo`** account. Nothing exists only on a
 server — the entire project can be rebuilt from git plus one nightly backup archive.
 
-<CardGrid stagger>
-	<Card title="HMR-Astro" icon="astro">
-		[github.com/wikigoo/HMR-Astro](https://github.com/wikigoo/HMR-Astro) — public website, Astro on Cloudflare Workers.
-	</Card>
-	<Card title="HMR-Flutter" icon="seti:dart">
-		[github.com/wikigoo/HMR-Flutter](https://github.com/wikigoo/HMR-Flutter) — Flutter Android app + the `/ai` web advisor build.
-	</Card>
-	<Card title="HMR-VPS" icon="linux">
-		[github.com/wikigoo/HMR-VPS](https://github.com/wikigoo/HMR-VPS) — infrastructure as code: Docker Compose, nginx configs, deploy & backup workflows, nightly state snapshot.
-	</Card>
-	<Card title="HMR-RAG" icon="document">
-		[github.com/wikigoo/HMR-RAG](https://github.com/wikigoo/HMR-RAG) — the RAG knowledge corpora for Apple, Samsung, and Xiaomi document stores.
-	</Card>
-	<Card title="HMR-Design" icon="figma">
-		[github.com/wikigoo/HMR-Design](https://github.com/wikigoo/HMR-Design) — UI/UX design system, tokens, branding, and screen specs (built with Claude Design).
-	</Card>
-	<Card title="HMR-Book" icon="open-book">
-		[github.com/wikigoo/HMR-Book](https://github.com/wikigoo/HMR-Book) — this documentation site (`book.hmrbot.com`), Astro Starlight.
-	</Card>
-</CardGrid>
+
+[github.com/wikigoo/HMR-Astro](https://github.com/wikigoo/HMR-Astro) — public website, Astro on Cloudflare Workers.
+
+[github.com/wikigoo/HMR-Flutter](https://github.com/wikigoo/HMR-Flutter) — Flutter Android app + the `/ai` web advisor build.
+	
+[github.com/wikigoo/HMR-VPS](https://github.com/wikigoo/HMR-VPS) — infrastructure as code: Docker Compose, nginx configs, deploy & backup workflows, nightly state snapshot.
+	
+[github.com/wikigoo/HMR-RAG](https://github.com/wikigoo/HMR-RAG) — the RAG knowledge corpora for Apple, Samsung, and Xiaomi document stores.
+
+[github.com/wikigoo/HMR-Design](https://github.com/wikigoo/HMR-Design) — UI/UX design system, tokens, branding, and screen specs (built with Claude Design).
+
+[github.com/wikigoo/HMR-Book](https://github.com/wikigoo/HMR-Book) — this documentation site (`book.hmrbot.com`), Astro Starlight.
 
 ---
 
