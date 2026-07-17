@@ -84,7 +84,7 @@ import { SignIn } from 'auth-astro/components';
 const session = await getSession(Astro.request);
 
 // آماده‌سازی داده‌ها برای پل ارتباطی با فلاتر
-
+```
 const userProfile = session ? {
 
   name: session.user?.name,
@@ -244,13 +244,13 @@ const userProfile = session ? {
 \</style>
 
 Generated code may be subject to license restrictions not shown here. Use code with care. [Learn more](https://cloud.google.com/duet-ai/docs/discover/code-generation-source-citation#how_helps_with_coding)
-
+```
 ---
 
 ### ۵. اتصال در سمت Flutter (Dart)
 
 در پروژه فلاتر خود، از پکیج `js` برای خواندن داده‌هایی که Astro فرستاده استفاده کنید:
-
+```
  // lib/auth\_service.dart
 
 import 'dart:js' as js;
@@ -284,7 +284,7 @@ class AstroAuth {
 }
 
 Generated code may be subject to license restrictions not shown here. Use code with care. [Learn more](https://cloud.google.com/duet-ai/docs/discover/code-generation-source-citation#how_helps_with_coding)
-
+```
 ---
 
 ### ۶. نکات حیاتی برای جلوگیری از خطای بیلد
