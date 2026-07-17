@@ -72,7 +72,8 @@ Generated code may be subject to license restrictions not shown here. Use code w
 
 این نسخه نهایی و حرفه‌ای است که هم لاگین را مدیریت می‌کند و هم فلاتر را بارگذاری می‌کند:
 
- \---
+```
+ \---
 
 import Layout from '../layouts/Layout.astro';
 
@@ -83,7 +84,6 @@ import { SignIn } from 'auth-astro/components';
 const session = await getSession(Astro.request);
 
 // آماده‌سازی داده‌ها برای پل ارتباطی با فلاتر
-```
 const userProfile = session ? {
 
   name: session.user?.name,
