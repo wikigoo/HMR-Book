@@ -24,15 +24,15 @@
 ### ۳. نصب و پیکربندی Astro
 
 ابتدا کتابخانه را نصب کنید:
-
+```
  npx astro add auth-astro
-
+```
 Generated code may be subject to license restrictions not shown here. Use code with care. [Learn more](https://cloud.google.com/duet-ai/docs/discover/code-generation-source-citation#how_helps_with_coding)
 
 #### الف) ایجاد فایل تنظیمات (بسیار مهم - ریشه پروژه)
 
 فایل **`auth.config.mjs`** را دقیقاً در **Root** پروژه (کنار `package.json`) بسازید:
-
+```
  // auth.config.mjs
 
 import Google from "@auth/core/providers/google";
@@ -54,7 +54,7 @@ export default defineConfig({
     \],
 
 });
-
+```
 Generated code may be subject to license restrictions not shown here. Use code with care. [Learn more](https://cloud.google.com/duet-ai/docs/discover/code-generation-source-citation#how_helps_with_coding)
 
 #### ب) ایجاد مسیر API (هندلر اصلی)
