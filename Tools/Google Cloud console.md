@@ -1,11 +1,3 @@
----
-title: "Gemini Cloud Assist chat – Gemini for Cloud Co… – ir-hmrbot-app – Google Cloud console"
-source: "https://console.cloud.google.com/gemini?project=ir-hmrbot-app&folder=&organizationId="
-author:
-description:
-tags:
-  - "samsung"
----
 این یک دستورالعمل **نهایی، بازبینی‌شده و حرفه‌ای** برای پیاده‌سازی سیستم احراز هویت پروژه **HMRbot** است. تمام خطاها (از جمله خطای بیلد کلودفلر) در این نسخه اصلاح شده است.
 
 ---
