@@ -5,10 +5,10 @@
 ### ۱. تنظیمات Google Cloud Console
 
 در بخش **OAuth 2.0 Client IDs**:
-
+```
 - **Authorized JavaScript origins:** `https://hmrbot.com` (و `http://localhost:4321` برای تست)
 - **Authorized redirect URIs:** `https://hmrbot.com/api/auth/callback/google`
-
+```
 ---
 
 ### ۲. تنظیم متغیرها در Cloudflare (محیط Production)
