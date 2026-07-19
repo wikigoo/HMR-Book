@@ -19,10 +19,14 @@ drawer modes verified in-browser on a running dev server. `HMR-Flutter` `flutter
 
 ## Deliverables (PRs)
 
-| Repo | PR | Branch | Gate |
-|---|---|---|---|
-| HMR-Astro | [#109](https://github.com/wikigoo/HMR-Astro/pull/109) | `feat/ai-chat-redesign` | `npm run build` ✅ |
-| HMR-Flutter | [#23](https://github.com/wikigoo/HMR-Flutter/pull/23) | `feat/chat-bubble-redesign` | `flutter analyze` ✅ |
+| Repo | PR | Branch | Gate | Status |
+|---|---|---|---|---|
+| HMR-Astro | [#109](https://github.com/wikigoo/HMR-Astro/pull/109) | `feat/ai-chat-redesign` | `npm run build` ✅ | **Merged + deployed** 2026-07-19 08:07 UTC |
+| HMR-Flutter | [#23](https://github.com/wikigoo/HMR-Flutter/pull/23) | `feat/chat-bubble-redesign` | `flutter analyze` ✅ | **Merged** 2026-07-19 08:07 UTC |
+
+Post-merge production check on hmrbot.com confirmed the new headline ("متخصص موبایلت باش"),
+the "تماس با ما" nav link, and Rubik in the live `/fonts/fonts.css`. The Cloudflare Workers
+build (the actual deploy) passed on the PR head and on `main`.
 
 ## What changed
 
@@ -81,13 +85,32 @@ open/close on both mobile and desktop.
   its existing conversations drawer (the mobile equivalent); the web layout was not forced onto
   mobile.
 
+## Gotcha: token drift guard (fixed mid-review)
+
+The first HMR-Astro commit hand-edited `src/styles/tokens/typography.css` to repoint
+`--font-en`/`--font-display` to Rubik. CI's **`drift`** job failed: `src/styles/tokens/*` are
+**generated** from `HMR-Design` via `npm run sync:tokens`, and the guard fails on any hand-edit.
+Fix: reverted `typography.css` to the synced value and moved the Rubik `:root` override into
+`src/styles/styles.css` (loaded *after* the token `@import`s, so it wins). The `@font-face` lives in
+`public/fonts/fonts.css` (not guarded). **Lesson for next time:** never hand-edit `tokens/*`; put
+overrides in `styles.css` or change the source in `HMR-Design` and re-sync.
+
+## Pre-existing CI debt (NOT caused by this change)
+
+HMR-Astro's **`check-and-build`** job (`npm run check` = `astro check`) is red on `main` with **16
+type errors**, all pre-existing: 15 in `Layout.astro`'s inline particles `<script>` (implicit-`any`
+on `w`/`h`/`pts`, `getContext`/`width`/`height` on `HTMLElement`) and 1 in `ai.astro:37`
+(`initialUser` not assignable to the inferred `null | undefined` prop type of `ChatApp.jsx`). The
+check is non-required (merge was allowed). Worth a dedicated fix so `main` goes green.
+
 ## Open items
 
-- [ ] Review + merge PR #109 (HMR-Astro) — **merging deploys the live site**; know
-      `wrangler rollback` before merging. Re-check the GIS sign-in visual once on production.
-- [ ] Review + merge PR #23 (HMR-Flutter). A release `appbundle` build is only required if a later
-      change touches `android/` or `pubspec.yaml` (this PR touches `lib/` only).
+- [x] ~~Merge #109 / #23~~ — done 2026-07-19; #109 deployed to production and verified live.
+- [ ] **Fix the 16 pre-existing `astro check` errors** so HMR-Astro `main` CI is green (type the
+      canvas as `HTMLCanvasElement` in `Layout.astro`'s script; give `ChatApp.jsx` real prop types
+      or type `initialUser` in `ai.astro`). Separate from this change.
+- [ ] Re-check the GIS sign-in visual on production (kept Google's button, not the custom pill).
 - [ ] Confirm whether the sidebar's decorative bottom box should return as a real action (e.g.
       settings) or stay dropped.
-- [ ] Optional: promote Rubik to the shared design-system token files (`HMR-Design`) if the brand
-      wants Rubik everywhere, rather than only via the HMR-Astro token override.
+- [ ] Optional: promote Rubik to the shared `HMR-Design` token source if the brand wants Rubik
+      everywhere, rather than the HMR-Astro `styles.css` override.
